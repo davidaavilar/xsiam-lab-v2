@@ -37,8 +37,3 @@ jobs:
           -backend-config="key=terraform.tfstate"
 
           terraform plan -var-file=terraform.tfvars -input=false
-
-      - name: Terraform Variables
-        working-directory: ${{ env.working-directory }}
-        id: step4
-        run: echo "KUBE_CONFIG=$(terraform output update_kube_config)" >> $GITHUB_OUTPUT
