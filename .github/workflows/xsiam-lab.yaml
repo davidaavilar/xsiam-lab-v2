@@ -21,9 +21,6 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       S3_BACKEND: ${{ vars.S3_BACKEND }}
-      DEPLOYMENT_NAME: ${{ vars.DEPLOYMENT_NAME }}
-    outputs:
-      KUBE_CONFIG: ${{ steps.step4.outputs.KUBE_CONFIG }}
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
@@ -36,4 +33,4 @@ jobs:
           -backend-config="region=${{ env.AWS_REGION }}" \
           -backend-config="key=terraform.tfstate"
 
-          terraform plan -var-file=terraform.tfvars -input=false
+          terraform apply --auto-approve -var-file=terraform.tfvars -input=false
