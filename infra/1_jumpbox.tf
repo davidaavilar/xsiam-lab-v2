@@ -19,13 +19,6 @@ locals {
   }
 }
 
-data "aws_subnets" "mgmt" {
-  filter {
-    name   = "tag:Name"
-    values = ["mgmt"]
-  }
-}
-
 resource "aws_instance" "jumpbox" {
   for_each = local.jumpbox
 
