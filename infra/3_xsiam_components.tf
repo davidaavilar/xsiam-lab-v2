@@ -31,24 +31,24 @@ data "aws_ami" "ubuntu2204" {
   }
 }
 
-locals {
-  xsiam_components = {
-    "${var.name_prefix}-broker_vm" = {
-      deploy = var.broker_vm
-      ami    = data.aws_ami.broker_vm.id
-      type   = "t3.medium"
-      user   = "ubuntu"
-      subnet = "windows"
-    }
-    "${var.name_prefix}-engine" = {
-      deploy = var.engine_vm
-      ami    = data.aws_ami.ubuntu2204.id
-      type   = "t3.medium"
-      user   = "ubuntu"
-      subnet = "linux"
-    }
-  }
-}
+# locals {
+#   xsiam_components = {
+#     "${var.name_prefix}-broker_vm" = {
+#       deploy = var.broker_vm
+#       ami    = data.aws_ami.broker_vm.id
+#       type   = "t3.medium"
+#       user   = "ubuntu"
+#       subnet = "windows"
+#     }
+#     "${var.name_prefix}-engine" = {
+#       deploy = var.engine_vm
+#       ami    = data.aws_ami.ubuntu2204.id
+#       type   = "t3.medium"
+#       user   = "ubuntu"
+#       subnet = "linux"
+#     }
+#   }
+# }
 
 
 # resource "aws_instance" "xsiam_components" {
