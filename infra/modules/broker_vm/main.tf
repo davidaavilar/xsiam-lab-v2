@@ -34,7 +34,7 @@ resource "aws_s3_bucket_public_access_block" "broker_vm" {
 }
 
 resource "aws_iam_role" "vmimport" {
-  name = "${var.name_prefix}-vmimport"
+  name = "vmimport"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -56,7 +56,7 @@ resource "aws_iam_role" "vmimport" {
 }
 
 resource "aws_iam_role_policy" "vmimport" {
-  name = "${var.name_prefix}-vmimport"
+  name = "vmimport"
   role = aws_iam_role.vmimport.id
 
   policy = jsonencode({

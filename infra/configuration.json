@@ -1,5 +1,5 @@
 {
-   "Description":"Cortex XSIAM Broker VM <version>",
+   "Description":"Cortex XSIAM Broker VM",
    "Format":"vmdk",
    "UserBucket":{
       "S3Bucket":"davila-xsiam-lab-broker-vm-5e738b2a",

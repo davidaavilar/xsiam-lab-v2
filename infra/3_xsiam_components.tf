@@ -5,6 +5,22 @@ module "broker_vm" {
   global_tags = var.global_tags
 }
 
+data "aws_ami" "broker" {
+  most_recent = true
+
+  owners = ["self"]
+
+  filter {
+    name   = "name"
+    values = ["*broker*"]
+  }
+}
+
+locals {
+  broker_ami_id = try(data.aws_ami.broker.id, null)
+  engine_ami_id = try(data.aws_ami.ubuntu2204.id, null)
+}
+
 # Ubuntu 22.04 oficial de Canonical
 data "aws_ami" "ubuntu2204" {
   most_recent = true
@@ -14,35 +30,20 @@ data "aws_ami" "ubuntu2204" {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
 }
 
 # locals {
 #   xsiam_components = {
 #     "${var.name_prefix}-broker_vm" = {
 #       deploy = var.broker_vm
-#       ami    = data.aws_ami.broker_vm.id
+#       ami    = local.broker_ami_id
 #       type   = "t3.medium"
 #       user   = "ubuntu"
 #       subnet = "windows"
 #     }
 #     "${var.name_prefix}-engine" = {
 #       deploy = var.engine_vm
-#       ami    = data.aws_ami.ubuntu2204.id
+#       ami    = local.engine_ami_id
 #       type   = "t3.medium"
 #       user   = "ubuntu"
 #       subnet = "linux"

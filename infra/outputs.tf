@@ -34,9 +34,9 @@ output "broker_vm_bucket_name" {
 }
 
 output "broker_vm_cp" {
-  value = var.broker_vm ? "aws s3 cp ~/${var.broker_vm_key} s3://${module.broker_vm[0].broker_vm_bucket_name}/${var.broker_vm_key}" : null
+  value = var.broker_vm ? "aws s3 cp ${var.broker_vm_key} s3://${module.broker_vm[0].broker_vm_bucket_name}/${var.broker_vm_key}" : null
 }
 
 output "broker_vm_import" {
-  value = var.broker_vm ? "# aws ec2 import-snapshot --description '<Cortex XSIAM Broker VM' --disk-container 'file://configuration.json'" : null
+  value = var.broker_vm ? "aws ec2 import-snapshot --description '<Cortex XSIAM Broker VM' --disk-container 'file://configuration.json'" : null
 }
