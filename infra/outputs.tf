@@ -30,7 +30,7 @@
 # }
 
 output "subnets" {
-  value = module.subnet_sets
+  value = module.subnet_sets["${var.vpc_name}-${var.name_prefix}-${var.broker_vm_subnet}"]
 }
 
 output "broker_vm_bucket_name" {
