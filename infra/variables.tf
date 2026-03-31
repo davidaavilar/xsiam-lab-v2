@@ -456,7 +456,7 @@ locals {
           vpc                = var.vpc_name
           subnet_group       = "${var.name_prefix}-mgmt"
           ipv6_address_count = 0
-          create_public_ip   = true
+          create_public_ip   = false
           source_dest_check  = true
           eip_allocation_id = {
             "01" = null
