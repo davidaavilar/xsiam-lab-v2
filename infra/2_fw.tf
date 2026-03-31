@@ -103,6 +103,7 @@ locals {
       iface_key => iface.id
     }
   }
+  fw_route_tables = module.subnet_sets
 }
 
 ### ROUTES ###
