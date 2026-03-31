@@ -105,26 +105,25 @@ locals {
       iface_key => iface.id
     }
   }
-
-  route_tables = {
+  fw_route_tables = [
     for k, v in module.subnet_sets :
-    k => v
-    if can(regex("(vlan[0-9]+|public", k))
-  }
+    v
+    if !strcontains(k, "mgmt")
+  ]
 
-  fw_default_routes = merge([
-    for fw_name, eni_map in local.fw_interfaces : merge([
-      for rt_name, rt_data in local.route_tables : {
-        for az, rt_id in rt_data.unique_route_table_ids :
-        "${fw_name}-${rt_name}-${az}" => {
-          route_table_id = rt_id
-          target_type    = can(regex("public", rt_name)) ? "igw" : "eni"
-          target_id      = can(regex("public", rt_name)) ? module.vpc[var.vpc_name].igw_id : eni_map[regex("(public|vlan[0-9]+)", rt_name)]
-        }
-        if !can(regex("mgmt", rt_name))
-      }
-    ]...)
-  ]...)
+  # fw_default_routes = merge([
+  #   for fw_name, eni_map in local.fw_interfaces : merge([
+  #     for rt_name, rt_data in local.fw_route_tables : {
+  #       for az, rt_id in rt_data.unique_route_table_ids :
+  #       "${fw_name}-${rt_name}-${az}" => {
+  #         route_table_id = rt_id
+  #         target_type    = can(regex("public", rt_name)) ? "igw" : "eni"
+  #         target_id      = can(regex("public", rt_name)) ? module.vpc[var.vpc_name].igw_id : eni_map[regex("(public|vlan[0-9]+)", rt_name)]
+  #       }
+  #       if !can(regex("mgmt", rt_name))
+  #     }
+  #   ]...)
+  # ]...)
 }
 
 # resource "aws_route" "fw_default" {

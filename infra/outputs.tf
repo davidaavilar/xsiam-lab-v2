@@ -33,17 +33,17 @@
 #   value = module.subnet_sets["${var.vpc_name}-${var.name_prefix}-${var.broker_vm_subnet}"]
 # }
 
-# output "fw_interfaces" {
-#   value = local.fw_eni_ids
-# }
-
-# output "fw_vlans" {
-#   value = local.fw_vlans
-# }
-
-output "fw_default_routes" {
-  value = local.fw_default_routes
+output "fw_interfaces" {
+  value = local.fw_interfaces
 }
+
+output "fw_route_tables" {
+  value = local.fw_route_tables
+}
+
+# output "fw_default_routes" {
+#   value = local.fw_default_routes
+# }
 
 output "broker_vm_bucket_name" {
   value = var.broker_vm ? module.broker_vm[0].broker_vm_bucket_name : null
