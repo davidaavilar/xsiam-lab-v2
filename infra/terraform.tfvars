@@ -10,8 +10,11 @@ global_tags = {
 
 ssh_key_name = "xsiam-lab-v2"
 
-### VPC
+## FW
 
+create_public_ip_mgmt = false # Change to true first time. After FW successful boot, modify it to false
+
+### VPC
 cidr           = "10.10.0.0/16"
 mgt_public_ips = ["186.31.0.249/32"]
 

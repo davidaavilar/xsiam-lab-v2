@@ -27,6 +27,12 @@ variable "panos_version" {
   default     = "11.1.4-h7"
 }
 
+variable "create_public_ip_mgmt" {
+  description = "Create Public IP MGMT to Boot and Licensing"
+  type        = bool
+  default     = true
+}
+
 ## XSIAM Components
 
 variable "broker_vm" {
@@ -456,7 +462,7 @@ locals {
           vpc                = var.vpc_name
           subnet_group       = "${var.name_prefix}-mgmt"
           ipv6_address_count = 0
-          create_public_ip   = false
+          create_public_ip   = var.create_public_ip_mgmt
           source_dest_check  = true
           eip_allocation_id = {
             "01" = null
