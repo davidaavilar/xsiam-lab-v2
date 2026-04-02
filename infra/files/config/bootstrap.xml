@@ -12,7 +12,7 @@
         <public-key>c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFEb2picE5xWStqdDJWcHQzMi9MUUpaV2RyQldrRUFqVWR2b1haaWxkUjdJbWNUTjBRaWNLdk91UE92SkYzbTRORmJTMWN2NkFyWHk4MWdndy9VOW55NStKNnRRcmtyS3V5aE1KQTdWNzY1ZDU3OHdTUVI3ZVFnZ2MrY3BlMTdmRGdUYjI3Z3g0NmNVWjNmNXZKTmVjNytxVUR5WWdpWWdwRDdRZjloMkRwVUdnbGNOajg5UDZCSDltN2dkTE9CMUhRMjVmbi9URWdwdHpEbXBEcmwrb2VNK0ZnMEEydVlOWFlqL0t2Mzd5cGpIMWplcGYzOTR0MTl3QUVuWDJQV1FZRlpBZ1NHYWhEWU5hNm52aFpoWDQxU0o1SHIxU2hyS2pRNWpyVUpzanYzUE9YdHFMYzhHZ1RzNXRGMlF2UXB3TG45NlBzUVlNWGRxTXZFbDljWnV3eHogeHNpYW0tbGFiLXYyCg==</public-key>
       </entry>
       <entry name="__openconfig">
-        <phash>$5$mrvsagon$bDSkLXjdUd80BSbLlQ3zpfs7A6O46vpacpwgt/Feqd1</phash>
+        <phash>$5$wkfmeiat$fxGunLiuGSaYsEePLT44mMqD2XPRDzmgeJSkVCiXyYB</phash>
         <permissions>
           <role-based>
             <deviceadmin>
@@ -438,7 +438,75 @@
           <service/>
           <service-group/>
           <schedule/>
-          <rulebase/>
+          <rulebase>
+            <nat>
+              <rules>
+                <entry name="nat_otubound" uuid="8313904a-1c9e-4a95-a862-5bf2d8869d71">
+                  <source-translation>
+                    <dynamic-ip-and-port>
+                      <interface-address>
+                        <interface>ethernet1/1</interface>
+                      </interface-address>
+                    </dynamic-ip-and-port>
+                  </source-translation>
+                  <to>
+                    <member>public</member>
+                  </to>
+                  <from>
+                    <member>vlan1</member>
+                    <member>vlan2</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <service>any</service>
+                </entry>
+              </rules>
+            </nat>
+            <security>
+              <rules>
+                <entry name="traffic_outbound" uuid="40b526eb-5859-4d7b-b5bc-d4ca1b32b48a">
+                  <to>
+                    <member>public</member>
+                  </to>
+                  <from>
+                    <member>vlan1</member>
+                    <member>vlan2</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>any</member>
+                  </application>
+                  <service>
+                    <member>any</member>
+                  </service>
+                  <source-hip>
+                    <member>any</member>
+                  </source-hip>
+                  <destination-hip>
+                    <member>any</member>
+                  </destination-hip>
+                  <action>allow</action>
+                  <log-start>no</log-start>
+                  <log-end>yes</log-end>
+                </entry>
+              </rules>
+            </security>
+          </rulebase>
           <import>
             <network>
               <interface>
