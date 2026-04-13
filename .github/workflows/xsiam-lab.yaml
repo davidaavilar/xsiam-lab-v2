@@ -28,6 +28,7 @@ jobs:
       - name: Write authcodes to tfvars
         working-directory: ${{ env.working-directory }}
         run: |
+          echo "" >> terraform.tfvars
           cat >> terraform.tfvars <<EOF
           authcodes = "${{ env.AUTHCODES }}"
           region = "${{ env.AWS_REGION }}"
