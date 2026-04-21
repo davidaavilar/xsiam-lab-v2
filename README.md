@@ -82,6 +82,7 @@ Create the following:
 | `GLOBAL_TAGS` | Resource tag for application name | `{ ManagedBy = "terraform", Application = "XSIAM Lab", Owner = "David Avila" }` |
 | `SSH_KEY_NAME` | SSH key pair name for EC2 access | `xsiam-lab-v2` |
 | `MGT_PUBLIC_IP` | Allowed public IPs for management access | `["YOUR PUBLIC IP ADDRESS"]` |
+| `S3_BACKEND` | S3 Backend | `davila-s3-tf-state` |
 
 ---
 
