@@ -7,6 +7,7 @@ locals {
       user    = "Administrator"
       volume  = 50
       network = { subnet = "vlan1", public_ip = false } # Always Public IP is FALSE
+      user_data = null
     }
     "${var.name_prefix}-ubuntu" = {
       deploy  = var.linux_deploy
@@ -15,6 +16,7 @@ locals {
       user    = "ubuntu"
       volume  = 30
       network = { subnet = "vlan1", public_ip = false } # Always Public IP is FALSE
+      user_data = null
     }
     "${var.name_prefix}-kali" = {
       deploy  = var.kali_deploy
@@ -23,6 +25,7 @@ locals {
       user    = "kali"
       volume  = 30
       network = { subnet = "vlan2", public_ip = false } # Always Public IP is FALSE
+      user_data = file("user_data_kali_mythic.sh")
     }
   }
 }
@@ -40,6 +43,9 @@ resource "aws_instance" "vms" {
   vpc_security_group_ids = try([module.vpc[var.vpc_name].security_group_ids["vmseries_traffic"]], [])
   ebs_optimized          = true
   subnet_id              = values(module.subnet_sets["${var.vpc_name}-${var.name_prefix}-${each.value.network.subnet}"].subnets)[0].id
+
+  user_data = each.value.user_data
+  user_data_replace_on_change = true
 
   metadata_options {
     http_endpoint = "enabled"
