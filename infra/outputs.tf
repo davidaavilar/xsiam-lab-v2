@@ -14,21 +14,21 @@ output "ssh_file_entries" {
 }
 
 output "jumpbox_access" {
-  value = {
+  value = nonsensitive({
     for name, inst in aws_instance.jumpbox :
     name => {
       public_ip  = aws_eip.jumpbox[name].public_ip
       private_ip = inst.private_ip
       user       = local.jumpbox[name].user
     }
-  }
+  })
 }
 
 # # FWS
 
 output "vmseries_public_ips" {
   description = "Map of public IPs created within `vmseries` module instances."
-  value       = { for k, v in module.vmseries : k => v.public_ips }
+  value       = nonsensitive({ for k, v in module.vmseries : k => v.public_ips })
 }
 
 output "vmseries_private_ips" {
