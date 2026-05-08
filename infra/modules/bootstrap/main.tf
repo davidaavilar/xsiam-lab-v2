@@ -70,11 +70,11 @@ resource "aws_s3_object" "bootstrap_dirs" {
   content = "/dev/null"
 }
 
-# resource "aws_s3_object" "authcodes" {
-#   bucket  = local.aws_s3_bucket.id
-#   key     = "license/authcodes"
-#   content = var.authcodes
-# }
+resource "aws_s3_object" "authcodes" {
+  bucket  = local.aws_s3_bucket.id
+  key     = "license/authcodes"
+  content = var.authcodes
+}
 
 resource "aws_s3_object" "init_cfg" {
   count = contains(fileset(local.source_root_directory, "**"), "config/init-cfg.txt") ? 0 : 1
