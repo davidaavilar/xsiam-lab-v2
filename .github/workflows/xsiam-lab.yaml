@@ -88,9 +88,6 @@ jobs:
           global_tags = ${{ vars.GLOBAL_TAGS }}
           mgt_public_ips = ${{ vars.MGT_PUBLIC_IP }}
           EOF
-      - name: View tfvars
-        run: |
-          cat terraform.tfvars
       - name: Terraform Deployment
         id: init
         working-directory: ${{ env.working-directory }}
