@@ -25,7 +25,7 @@ locals {
       user    = "kali"
       volume  = 30
       network = { subnet = "vlan2", public_ip = false } # Always Public IP is FALSE
-      user_data = file("${path.module}/user_data_kali_mythic.sh")
+      user_data = file("${path.module}/user_data_kali.sh")
     }
   }
 }
