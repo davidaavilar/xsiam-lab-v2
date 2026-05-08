@@ -50,6 +50,14 @@ make
 # Save status
 ./mythic-cli status || true
 
-# Save status
-echo "mythic_admin"
+./mythic-cli install github https://github.com/MythicAgents/Apollo.git
+./mythic-cli install github https://github.com/MythicAgents/Medusa.git
+./mythic-cli install github https://github.com/MythicAgents/Xenon.git
+
+./mythic-cli install github https://github.com/MythicC2Profiles/http
+./mythic-cli install github https://github.com/MythicC2Profiles/dns
+./mythic-cli install github https://github.com/MythicC2Profiles/dynamichttp
+./mythic-cli install github https://github.com/MythicC2Profiles/smb
+
+# Get Password
 sudo ./mythic-cli config get MYTHIC_ADMIN_PASSWORD

@@ -111,6 +111,22 @@ Create the following:
 ├── .gitignore
 └── README.md
 ```
+## Mythic on Kali (if Kali is deployed)
+
+For attack testing porpuses, we are installing [Mythic](https://docs.mythic-c2.net/version-2.3/installation) with some agents and C2 profiles:
+
+```text
+./mythic-cli install github https://github.com/MythicAgents/Apollo.git
+./mythic-cli install github https://github.com/MythicAgents/Medusa.git
+./mythic-cli install github https://github.com/MythicAgents/Xenon.git
+
+./mythic-cli install github https://github.com/MythicC2Profiles/http
+./mythic-cli install github https://github.com/MythicC2Profiles/dns
+./mythic-cli install github https://github.com/MythicC2Profiles/dynamichttp
+./mythic-cli install github https://github.com/MythicC2Profiles/smb
+```
+
+To see the `mythic_admin` password go into the Kali and `cat "/var/log/user-data-mythic.log"`
 
 ## Variables
 
